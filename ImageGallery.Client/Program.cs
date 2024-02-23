@@ -26,10 +26,11 @@ builder.Services.AddAuthentication(options =>
   .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
   {
       options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-      options.Authority = "https://localhost:5001";
-      options.ClientId = "imagegalleryClient";
-      options.ClientSecret = "gallerySecret";
-      options.ResponseType = "code";
+      options.SignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
+      options.Authority = builder.Configuration["OpenIdConnectSettings:Authority"];
+      options.ClientId = builder.Configuration["OpenIdConnectSettings:ClientId"];
+      options.ClientSecret = builder.Configuration["OpenIdConnectSettings:ClientSecret"];
+      options.ResponseType = builder.Configuration["OpenIdConnectSettings:ResponseType"];
       options.SaveTokens = true;
   });
 
