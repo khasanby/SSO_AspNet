@@ -44,7 +44,8 @@ internal static class HostingExtensions
             options.ConfigureDbContext = db => db.UseNpgsql(
                 connectionString,
                 npgsql => npgsql.MigrationsAssembly(migrationAssembly));
-        });
+        })
+        .AddTestUsers(TestUsers.Users);
 
         return builder.Build();
     }
