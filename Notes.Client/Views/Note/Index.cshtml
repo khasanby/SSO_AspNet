@@ -1,0 +1,21 @@
+﻿@model Notes.Client.ViewModels.NoteIndexViewModel
+
+<div class="bottomMarginDefault">
+</div>
+
+<div class="container">
+      <div class="row">
+    @foreach (var item in Model.Notes)
+    {
+       <div class="pull-left col-md-4">
+            <div>
+                <div class="h6 topMarginSmall">@item.NoteText</div>
+                <div class="bottomMarginDefault">
+                    <a asp-action="EditNote" asp-controller="Note" asp-route-id="@item.Id">Edit note</a> |
+                    <a asp-action="DeleteNote" asp-controller="Note" asp-route-id="@item.Id">Delete note</a>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div> 

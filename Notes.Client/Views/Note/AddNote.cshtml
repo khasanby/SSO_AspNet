@@ -1,0 +1,20 @@
+﻿@model Notes.Client.ViewModels.AddNoteViewModel
+
+<h2 class="leftMarginSmaller">Add Note</h2>
+
+<form asp-action="AddNote" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+
+    <div class="form-horizontal leftMarginDefault">
+        
+        <div class="form-group">
+            <div>You note</div>
+            <input asp-for="NoteText" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input type="submit" class="btn btn-primary" value="Add note" />
+            </div>
+        </div>
+    </div>
+</form>
