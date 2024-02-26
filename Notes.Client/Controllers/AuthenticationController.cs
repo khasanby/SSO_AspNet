@@ -8,18 +8,11 @@ namespace Notes.Client.Controllers
 {
     public class AuthenticationController : Controller
     {
-        [Authorize]
         /// <summary>
         /// Logs the user out of the application.
         /// </summary>
+        [Authorize]
         public async Task Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        }
-
-        [HttpPost("sso-logout")]
-        public async Task BackChannelLogout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);

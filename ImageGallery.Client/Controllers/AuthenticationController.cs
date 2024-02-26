@@ -12,7 +12,6 @@ namespace ImageGallery.Client.Controllers
         /// Logs the user out of the application.
         /// </summary>
         [Authorize]
-        [HttpPost("Logout")]
         public async Task Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

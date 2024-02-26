@@ -1,10 +1,11 @@
 using Duende.IdentityServer.EntityFramework.DbContexts;
-using Duende.IdentityServer.EntityFramework.Mappers;
+using IdentityModel;
 using Marvin.IDP.DbContexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Reflection;
+using System.Security.Claims;
 
 namespace Marvin.IDP;
 
@@ -59,7 +60,8 @@ internal static class HostingExtensions
             app.UseDeveloperExceptionPage();
         }
 
-        InitializeDatabase(app);
+        //InitializeDatabase(app);
+        //EnsureSeedData(app);
 
         // uncomment if you want to add a UI
         app.UseStaticFiles();
@@ -108,6 +110,81 @@ internal static class HostingExtensions
             //    }
             //    context.SaveChanges();
             //}
+        }
+    }
+
+    private static void EnsureSeedData(WebApplication app)
+    {
+        using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<IdentityProviderDbContext>();
+            context.Database.Migrate();
+
+            var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var alice = userMgr.FindByNameAsync("alice").Result;
+            if (alice == null)
+            {
+                alice = new IdentityUser
+                {
+                    UserName = "alice",
+                    Email = "AliceSmith@email.com",
+                    EmailConfirmed = true,
+                };
+                var result = userMgr.CreateAsync(alice, "Pass123$").Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                result = userMgr.AddClaimsAsync(alice, new Claim[]{
+                            new Claim(JwtClaimTypes.Name, "Alice Smith"),
+                            new Claim(JwtClaimTypes.GivenName, "Alice"),
+                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                        }).Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+                Log.Debug("alice created");
+            }
+            else
+            {
+                Log.Debug("alice already exists");
+            }
+
+            var bob = userMgr.FindByNameAsync("bob").Result;
+            if (bob == null)
+            {
+                bob = new IdentityUser
+                {
+                    UserName = "bob",
+                    Email = "BobSmith@email.com",
+                    EmailConfirmed = true
+                };
+                var result = userMgr.CreateAsync(bob, "Pass123$").Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                result = userMgr.AddClaimsAsync(bob, new Claim[]{
+                            new Claim(JwtClaimTypes.Name, "Bob Smith"),
+                            new Claim(JwtClaimTypes.GivenName, "Bob"),
+                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                            new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
+                            new Claim("location", "somewhere")
+                        }).Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+                Log.Debug("bob created");
+            }
+            else
+            {
+                Log.Debug("bob already exists");
+            }
         }
     }
 }
