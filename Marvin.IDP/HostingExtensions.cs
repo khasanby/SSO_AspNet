@@ -18,11 +18,11 @@ internal static class HostingExtensions
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         var migrationAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
 
-        //builder.Services.AddDbContext<IdentityProviderDbContext>(options => options.UseNpgsql(connectionString));
+        builder.Services.AddDbContext<IdentityProviderDbContext>(options => options.UseNpgsql(connectionString));
 
-        //builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-        //                .AddEntityFrameworkStores<IdentityProviderDbContext>()
-        //                .AddDefaultTokenProviders();
+        builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                        .AddEntityFrameworkStores<IdentityProviderDbContext>()
+                        .AddDefaultTokenProviders();
 
         builder.Services.AddIdentityServer(options =>
         {
@@ -45,7 +45,7 @@ internal static class HostingExtensions
                 connectionString,
                 npgsql => npgsql.MigrationsAssembly(migrationAssembly));
         })
-        .AddTestUsers(TestUsers.Users);
+        .AddAspNetIdentity<IdentityUser>();
 
         return builder.Build();
     }
@@ -80,34 +80,34 @@ internal static class HostingExtensions
         {
             serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
-            var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-            context.Database.Migrate();
-            if (!context.Clients.Any())
-            {
-                foreach (var client in Config.Clients)
-                {
-                    context.Clients.Add(client.ToEntity());
-                }
-                context.SaveChanges();
-            }
+            //var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+            //context.Database.Migrate();
+            //if (!context.Clients.Any())
+            //{
+            //    foreach (var client in Config.Clients)
+            //    {
+            //        context.Clients.Add(client.ToEntity());
+            //    }
+            //    context.SaveChanges();
+            //}
 
-            if (!context.IdentityResources.Any())
-            {
-                foreach (var resource in Config.IdentityResources)
-                {
-                    context.IdentityResources.Add(resource.ToEntity());
-                }
-                context.SaveChanges();
-            }
+            //if (!context.IdentityResources.Any())
+            //{
+            //    foreach (var resource in Config.IdentityResources)
+            //    {
+            //        context.IdentityResources.Add(resource.ToEntity());
+            //    }
+            //    context.SaveChanges();
+            //}
 
-            if (!context.ApiScopes.Any())
-            {
-                foreach (var resource in Config.ApiScopes)
-                {
-                    context.ApiScopes.Add(resource.ToEntity());
-                }
-                context.SaveChanges();
-            }
+            //if (!context.ApiScopes.Any())
+            //{
+            //    foreach (var resource in Config.ApiScopes)
+            //    {
+            //        context.ApiScopes.Add(resource.ToEntity());
+            //    }
+            //    context.SaveChanges();
+            //}
         }
     }
 }

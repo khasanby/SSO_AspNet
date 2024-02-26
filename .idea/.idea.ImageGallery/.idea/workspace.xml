@@ -15,7 +15,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11745635-7648-4ad6-ba4f-b56b02706dcb" name="Changes" comment="" />
+    <list default="true" id="11745635-7648-4ad6-ba4f-b56b02706dcb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ImageGallery/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ImageGallery/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marvin.IDP/Config.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marvin.IDP/HostingExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Marvin.IDP/HostingExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marvin.IDP/Marvin.IDP.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Marvin.IDP/Marvin.IDP.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marvin.IDP/Pages/IdentityServerSuppressions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Marvin.IDP/Pages/IdentityServerSuppressions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Marvin.IDP/Pages/TestUsers.cs" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -203,6 +210,10 @@
       <updated>1708688361005</updated>
       <workItem from="1708688365678" duration="1221000" />
       <workItem from="1708694556898" duration="1221000" />
+      <workItem from="1708940576737" duration="460000" />
+      <workItem from="1708941299348" duration="546000" />
+      <workItem from="1708942094444" duration="835000" />
+      <workItem from="1708943395212" duration="123000" />
     </task>
     <servers />
   </component>
