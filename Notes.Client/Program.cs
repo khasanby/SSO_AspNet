@@ -31,6 +31,7 @@ builder.Services.AddAuthentication(options =>
       options.ClientSecret = builder.Configuration["OpenIdConnectSettings:ClientSecret"];
       options.ResponseType = builder.Configuration["OpenIdConnectSettings:ResponseType"];
       options.SaveTokens = true;
+      options.SignedOutCallbackPath = "/signout-callback-oidc";
   });
 
 var app = builder.Build();

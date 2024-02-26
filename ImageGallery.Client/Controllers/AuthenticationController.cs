@@ -8,10 +8,11 @@ namespace ImageGallery.Client.Controllers
 {
     public class AuthenticationController : Controller
     {
-        [Authorize]
         /// <summary>
         /// Logs the user out of the application.
         /// </summary>
+        [Authorize]
+        [HttpPost("Logout")]
         public async Task Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

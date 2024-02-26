@@ -18,11 +18,11 @@ internal static class HostingExtensions
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         var migrationAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
 
-        builder.Services.AddDbContext<IdentityProviderDbContext>(options => options.UseNpgsql(connectionString));
+        //builder.Services.AddDbContext<IdentityProviderDbContext>(options => options.UseNpgsql(connectionString));
 
-        builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-                        .AddEntityFrameworkStores<IdentityProviderDbContext>()
-                        .AddDefaultTokenProviders();
+        //builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+        //                .AddEntityFrameworkStores<IdentityProviderDbContext>()
+        //                .AddDefaultTokenProviders();
 
         builder.Services.AddIdentityServer(options =>
         {

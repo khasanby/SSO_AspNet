@@ -23,7 +23,6 @@ public static class Config
                 ClientId = "image-gallery-client",
                 AllowedGrantTypes = GrantTypes.Code,
                 RedirectUris = { "https://localhost:7184/signin-oidc" },
-                PostLogoutRedirectUris = { "https://localhost:7184/signout-callback-oidc" },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
@@ -33,6 +32,9 @@ public static class Config
                 RequireConsent = false,
                 AllowedCorsOrigins = new List<string> { "https://localhost:7184" },
                 AccessTokenLifetime = 86400,
+                //FrontChannelLogoutUri = "https://localhost:7184/signout-oidc",
+                BackChannelLogoutUri = "https://localhost:7184/signout-oidc",
+                PostLogoutRedirectUris = { "https://localhost:7184/signout-callback-oidc" },
             },
             new Client
             {
@@ -40,7 +42,6 @@ public static class Config
                 ClientId = "notes-client",
                 AllowedGrantTypes = GrantTypes.Code,
                 RedirectUris = { "https://localhost:7020/signin-oidc" },
-                PostLogoutRedirectUris = { "https://localhost:7020/signout-callback-oidc" },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
@@ -50,6 +51,9 @@ public static class Config
                 RequireConsent = false,
                 AllowedCorsOrigins = new List<string> { "https://localhost:7020" },
                 AccessTokenLifetime = 86400,
+                //FrontChannelLogoutUri = "https://localhost:7020/signout-oidc",
+                BackChannelLogoutUri = "https://localhost:7020/signout-oidc",
+                PostLogoutRedirectUris = { "https://localhost:7020/signout-callback-oidc" },
             }
         ];
 }
